@@ -1,20 +1,27 @@
-import React, { useState } from "react";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import React, { useState, useEffect } from "react";
 import Main from "./components/main";
-import Side from "./components/side";
+import { connect } from "react-redux";
+import { createSocket, send } from "@/utils/socket";
 
-export default function Layout() {
-  const [collapsed, setCollapsed] = useState(false);
+function Layout(props: any) {
+  const { user } = props;
+  useEffect(() => {
+    createSocket();
+    send("login", {
+      account: user.phone,
+    });
+  }, []);
 
   return (
     <div className="flex flex-col h-screen">
-      <Header></Header>
       <div className="flex-1">
         <Main></Main>
       </div>
-
-      <Footer></Footer>
     </div>
   );
 }
+export default connect(({ user }) => {
+  return {
+    user: user.userInfo,
+  };
+})(Layout);

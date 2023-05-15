@@ -1,35 +1,30 @@
 import { Dispatch, useState, SetStateAction } from "react";
-import OptionSide from "./components/option-side";
-import ChatList from "./components/chat-list";
-import Chat from "./components/chat";
 import { User } from "./constants";
+import dynamic from "next/dynamic";
+
+const OptionSide = dynamic(import("./components/option-side"), { ssr: false });
+const Chat = dynamic(import("./components/chat"), { ssr: false });
+const ChatList = dynamic(import("./components/chat-list"), { ssr: false });
 
 export default function Main() {
-  const [user, setUser] = useState<User | null>(null);
-
-  const handleClickUser = (user: User) => {
-    console.log(user);
-    setUser(user);
-  };
-
   return (
     <>
       <div className="flex items-center justify-center w-full h-full px-4 py-4">
         <div
           className="flex w-full h-full rounded-lg"
           style={{
-            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+            boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
           }}
         >
           {/* 选项 */}
           <OptionSide />
           {/* 列表 */}
           <div>
-            <ChatList handleClickUser={handleClickUser}></ChatList>
+            <ChatList></ChatList>
           </div>
           {/* 聊天页 */}
           <div className="flex-1">
-            <Chat user={user}></Chat>
+            <Chat></Chat>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <script
           defer
-          src="https://at.alicdn.com/t/c/font_4045168_rwyoh9yvwos.js"
+          src="https://at.alicdn.com/t/c/font_4045168_ofk8i9n7w6.js"
         ></script>
       </Head>
       <body>

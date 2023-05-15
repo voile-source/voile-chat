@@ -1,8 +1,9 @@
 import { actionTypes } from "../actions/user";
 
 const initialState = {
-  user: {},
+  userInfo: {},
   isLogin: false,
+  currentChat: {},
 };
 
 export default function UserReducer(
@@ -11,11 +12,15 @@ export default function UserReducer(
 ) {
   switch (action.type) {
     case actionTypes.LOGIN: {
-      return {
-        ...state,
-        isLogin: true,
-        user: action.payload,
-      };
+      state = JSON.parse(JSON.stringify(state));
+      state.userInfo = action.payload;
+      state.isLogin = true;
+      return state;
+    }
+    case actionTypes.OPEN_CHAT: {
+      state = JSON.parse(JSON.stringify(state));
+      state.currentChat = action.payload;
+      return state;
     }
     default:
       return state;

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "@/components/icon";
 import Image from "next/image";
+import { User } from "../constants";
 
 function OptionItem({
   name,
@@ -18,6 +19,7 @@ function OptionItem({
 
 export default function OptionSide() {
   const [currentOption, setCurrentOption] = useState("chat");
+  let user: User = JSON.parse(window.localStorage.getItem("user")!);
 
   const handleClickOption = (option: string) => {
     setCurrentOption(option);
@@ -53,7 +55,7 @@ export default function OptionSide() {
             width="20"
             height="20"
             className="rounded object-cover w-8 h-8 cursor-pointer"
-            src="https://volit.oss-cn-guangzhou.aliyuncs.com/image/wallhaven-zyq5xy_1280x1920.png"
+            src={user.avatar}
           ></Image>
         </span>
         {optionList}
